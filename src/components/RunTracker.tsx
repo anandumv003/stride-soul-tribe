@@ -1,7 +1,6 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Play, Pause, Square, MapPin } from "lucide-react";
 import MoodJournal from "./MoodJournal";
 
@@ -70,92 +69,94 @@ const RunTracker = ({ onBack }: RunTrackerProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900 text-white">
-      <div className="max-w-md mx-auto min-h-screen flex flex-col">
+    <div className="min-h-screen bg-black text-white">
+      <div className="max-w-md mx-auto min-h-screen flex flex-col relative">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-20"></div>
+        
         {/* Header */}
-        <div className="flex items-center justify-between p-6">
+        <div className="relative z-10 flex items-center justify-between p-6">
           <Button
             variant="ghost"
             size="sm"
             onClick={onBack}
-            className="text-white hover:bg-white/20"
+            className="text-white hover:bg-white/10 border border-gray-700"
           >
             <ArrowLeft className="h-5 w-5" />
           </Button>
-          <div className="flex items-center text-sm text-purple-200">
-            <MapPin className="h-4 w-4 mr-1" />
+          <div className="flex items-center text-sm text-gray-300 font-bold uppercase tracking-wide">
+            <MapPin className="h-4 w-4 mr-2" />
             {currentLocation}
           </div>
         </div>
 
         {/* Main Stats */}
-        <div className="flex-1 flex flex-col items-center justify-center p-6 space-y-8">
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center p-6 space-y-12">
           <div className="text-center">
-            <div className="text-6xl font-bold mb-2">{formatTime(time)}</div>
-            <div className="text-purple-200">Duration</div>
+            <div className="text-8xl font-black mb-4 tracking-tighter">{formatTime(time)}</div>
+            <div className="text-gray-400 uppercase tracking-widest font-bold">Duration</div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 w-full max-w-xs">
+          <div className="grid grid-cols-2 gap-12 w-full max-w-sm">
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-300">{distance.toFixed(2)}</div>
-              <div className="text-sm text-blue-200">km</div>
+              <div className="text-5xl font-black text-green-400 mb-2">{distance.toFixed(2)}</div>
+              <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Kilometers</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-pink-300">{currentPace}</div>
-              <div className="text-sm text-pink-200">pace/km</div>
+              <div className="text-5xl font-black text-blue-400 mb-2">{currentPace}</div>
+              <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Pace/KM</div>
             </div>
           </div>
 
           {/* Run Controls */}
-          <div className="flex space-x-4 mt-8">
+          <div className="flex space-x-6 mt-12">
             {!isRunning ? (
               <Button
                 onClick={handleStart}
                 size="lg"
-                className="bg-green-500 hover:bg-green-600 text-white rounded-full w-16 h-16 p-0 shadow-lg"
+                className="bg-white text-black hover:bg-gray-100 w-20 h-20 p-0 font-black text-xl shadow-2xl border-4 border-white"
               >
-                <Play className="h-8 w-8" />
+                <Play className="h-10 w-10" />
               </Button>
             ) : (
               <Button
                 onClick={handlePause}
                 size="lg"
-                className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-full w-16 h-16 p-0 shadow-lg"
+                className="bg-yellow-400 text-black hover:bg-yellow-300 w-20 h-20 p-0 font-black text-xl shadow-2xl border-4 border-yellow-400"
               >
-                <Pause className="h-8 w-8" />
+                <Pause className="h-10 w-10" />
               </Button>
             )}
             
             <Button
               onClick={handleStop}
               size="lg"
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-purple-900 rounded-full w-16 h-16 p-0 shadow-lg"
+              className="bg-transparent border-4 border-white text-white hover:bg-white hover:text-black w-20 h-20 p-0 font-black text-xl shadow-2xl"
             >
-              <Square className="h-8 w-8" />
+              <Square className="h-10 w-10" />
             </Button>
           </div>
         </div>
 
         {/* Bottom Stats */}
-        <Card className="m-6 bg-white/10 backdrop-blur-lg border-white/20">
-          <CardContent className="p-4">
-            <div className="grid grid-cols-3 gap-4 text-center text-sm">
+        <div className="relative z-10 m-6 bg-gray-900/80 backdrop-blur-lg border border-gray-700">
+          <div className="p-6">
+            <div className="grid grid-cols-3 gap-6 text-center text-sm">
               <div>
-                <div className="font-semibold">Avg Pace</div>
-                <div className="text-purple-200">{currentPace}</div>
+                <div className="font-black text-lg text-white mb-1">{currentPace}</div>
+                <div className="text-gray-400 uppercase tracking-wide font-bold">Avg Pace</div>
               </div>
               <div>
-                <div className="font-semibold">Calories</div>
-                <div className="text-purple-200">{Math.round(distance * 65)}</div>
+                <div className="font-black text-lg text-orange-400 mb-1">{Math.round(distance * 65)}</div>
+                <div className="text-gray-400 uppercase tracking-wide font-bold">Calories</div>
               </div>
               <div>
-                <div className="font-semibold">Steps</div>
-                <div className="text-purple-200">{Math.round(distance * 1300)}</div>
+                <div className="font-black text-lg text-green-400 mb-1">{Math.round(distance * 1300)}</div>
+                <div className="text-gray-400 uppercase tracking-wide font-bold">Steps</div>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );

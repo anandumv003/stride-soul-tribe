@@ -1,8 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Heart, MessageCircle, MapPin, Clock } from "lucide-react";
+import { Heart, MessageCircle, MapPin, Clock, Zap } from "lucide-react";
 
 interface FeedCardProps {
   id: number;
@@ -20,71 +18,71 @@ interface FeedCardProps {
 const FeedCard = ({ user, avatar, distance, duration, mood, note, time, cheers, location }: FeedCardProps) => {
   const getMoodColor = (mood: string) => {
     const colors = {
-      'energized': 'bg-yellow-100 text-yellow-800',
-      'accomplished': 'bg-purple-100 text-purple-800',
-      'peaceful': 'bg-blue-100 text-blue-800',
-      'happy': 'bg-green-100 text-green-800',
-      'grateful': 'bg-orange-100 text-orange-800',
+      'energized': 'text-yellow-400 bg-yellow-400/10 border-yellow-400/20',
+      'accomplished': 'text-purple-400 bg-purple-400/10 border-purple-400/20',
+      'peaceful': 'text-blue-400 bg-blue-400/10 border-blue-400/20',
+      'happy': 'text-green-400 bg-green-400/10 border-green-400/20',
+      'grateful': 'text-orange-400 bg-orange-400/10 border-orange-400/20',
     };
-    return colors[mood as keyof typeof colors] || 'bg-gray-100 text-gray-800';
+    return colors[mood as keyof typeof colors] || 'text-gray-400 bg-gray-400/10 border-gray-400/20';
   };
 
   return (
-    <Card className="shadow-sm hover:shadow-md transition-shadow">
-      <CardContent className="p-4">
+    <div className="bg-gray-900 border border-gray-800 hover:border-gray-700 transition-all duration-200">
+      <div className="p-6">
         {/* User Header */}
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center space-x-4">
+            <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center text-black font-black text-lg">
               {avatar}
             </div>
             <div>
-              <div className="font-semibold text-sm">{user}</div>
-              <div className="text-xs text-gray-500 flex items-center">
+              <div className="font-bold text-white text-lg">{user}</div>
+              <div className="text-xs text-gray-400 flex items-center uppercase tracking-wide">
                 <Clock className="h-3 w-3 mr-1" />
                 {time}
               </div>
             </div>
           </div>
-          <Badge className={`${getMoodColor(mood)} border-0`}>
+          <div className={`px-3 py-1 text-xs font-bold uppercase tracking-wider border ${getMoodColor(mood)}`}>
             {mood}
-          </Badge>
+          </div>
         </div>
 
-        {/* Run Stats */}
-        <div className="grid grid-cols-3 gap-4 mb-3 text-center">
-          <div>
-            <div className="text-lg font-bold text-orange-600">{distance}km</div>
-            <div className="text-xs text-gray-500">Distance</div>
+        {/* Run Stats - Nike Style Grid */}
+        <div className="grid grid-cols-3 gap-4 mb-4 bg-black/30 p-4 border border-gray-800">
+          <div className="text-center">
+            <div className="text-2xl font-black text-green-400">{distance}</div>
+            <div className="text-xs text-gray-400 uppercase tracking-wide">KM</div>
           </div>
-          <div>
-            <div className="text-lg font-bold text-blue-600">{duration}</div>
-            <div className="text-xs text-gray-500">Time</div>
+          <div className="text-center">
+            <div className="text-2xl font-black text-blue-400">{duration}</div>
+            <div className="text-xs text-gray-400 uppercase tracking-wide">Time</div>
           </div>
-          <div className="text-left">
-            <div className="text-xs text-gray-500 flex items-center">
+          <div className="text-center">
+            <div className="text-xs text-gray-400 flex items-center justify-center">
               <MapPin className="h-3 w-3 mr-1" />
-              {location}
             </div>
+            <div className="text-xs text-gray-300 font-medium">{location}</div>
           </div>
         </div>
 
         {/* Note */}
-        <p className="text-sm text-gray-700 mb-3 leading-relaxed">{note}</p>
+        <p className="text-gray-300 mb-4 leading-relaxed font-medium">{note}</p>
 
         {/* Actions */}
-        <div className="flex items-center space-x-4 pt-2 border-t border-gray-100">
-          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50 p-2">
-            <Heart className="h-4 w-4 mr-1" />
-            <span className="text-xs">{cheers}</span>
+        <div className="flex items-center space-x-6 pt-4 border-t border-gray-800">
+          <Button variant="ghost" className="text-red-400 hover:text-red-300 hover:bg-red-400/10 p-0 font-bold">
+            <Heart className="h-5 w-5 mr-2" />
+            <span className="text-sm uppercase tracking-wide">{cheers}</span>
           </Button>
-          <Button variant="ghost" size="sm" className="text-blue-500 hover:text-blue-600 hover:bg-blue-50 p-2">
-            <MessageCircle className="h-4 w-4 mr-1" />
-            <span className="text-xs">Cheer</span>
+          <Button variant="ghost" className="text-gray-400 hover:text-white hover:bg-white/10 p-0 font-bold">
+            <MessageCircle className="h-5 w-5 mr-2" />
+            <span className="text-sm uppercase tracking-wide">Cheer</span>
           </Button>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };
 
