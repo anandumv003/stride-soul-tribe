@@ -69,42 +69,39 @@ const RunTracker = ({ onBack }: RunTrackerProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <div className="max-w-md mx-auto min-h-screen flex flex-col relative">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-20"></div>
-        
+    <div className="min-h-screen bg-white text-gray-900">
+      <div className="max-w-md mx-auto min-h-screen flex flex-col">
         {/* Header */}
-        <div className="relative z-10 flex items-center justify-between p-6">
+        <div className="flex items-center justify-between p-6 border-b border-gray-100">
           <Button
             variant="ghost"
             size="sm"
             onClick={onBack}
-            className="text-white hover:bg-white/10 border border-gray-700"
+            className="text-gray-600 hover:text-gray-900 hover:bg-gray-50"
           >
             <ArrowLeft className="h-5 w-5" />
           </Button>
-          <div className="flex items-center text-sm text-gray-300 font-bold uppercase tracking-wide">
+          <div className="flex items-center text-sm text-gray-500 font-normal">
             <MapPin className="h-4 w-4 mr-2" />
             {currentLocation}
           </div>
         </div>
 
         {/* Main Stats */}
-        <div className="relative z-10 flex-1 flex flex-col items-center justify-center p-6 space-y-12">
+        <div className="flex-1 flex flex-col items-center justify-center p-6 space-y-12">
           <div className="text-center">
-            <div className="text-8xl font-black mb-4 tracking-tighter">{formatTime(time)}</div>
-            <div className="text-gray-400 uppercase tracking-widest font-bold">Duration</div>
+            <div className="text-6xl font-light mb-4 text-gray-900">{formatTime(time)}</div>
+            <div className="text-gray-400 uppercase tracking-widest text-sm">Duration</div>
           </div>
 
           <div className="grid grid-cols-2 gap-12 w-full max-w-sm">
             <div className="text-center">
-              <div className="text-5xl font-black text-green-400 mb-2">{distance.toFixed(2)}</div>
-              <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Kilometers</div>
+              <div className="text-4xl font-light text-gray-900 mb-2">{distance.toFixed(2)}</div>
+              <div className="text-sm text-gray-400 uppercase tracking-widest">Kilometers</div>
             </div>
             <div className="text-center">
-              <div className="text-5xl font-black text-blue-400 mb-2">{currentPace}</div>
-              <div className="text-sm text-gray-400 uppercase tracking-widest font-bold">Pace/KM</div>
+              <div className="text-4xl font-light text-gray-900 mb-2">{currentPace}</div>
+              <div className="text-sm text-gray-400 uppercase tracking-widest">Pace/KM</div>
             </div>
           </div>
 
@@ -114,45 +111,45 @@ const RunTracker = ({ onBack }: RunTrackerProps) => {
               <Button
                 onClick={handleStart}
                 size="lg"
-                className="bg-white text-black hover:bg-gray-100 w-20 h-20 p-0 font-black text-xl shadow-2xl border-4 border-white"
+                className="bg-gray-900 text-white hover:bg-gray-800 w-16 h-16 p-0 rounded-full shadow-lg"
               >
-                <Play className="h-10 w-10" />
+                <Play className="h-8 w-8" />
               </Button>
             ) : (
               <Button
                 onClick={handlePause}
                 size="lg"
-                className="bg-yellow-400 text-black hover:bg-yellow-300 w-20 h-20 p-0 font-black text-xl shadow-2xl border-4 border-yellow-400"
+                className="bg-orange-500 text-white hover:bg-orange-600 w-16 h-16 p-0 rounded-full shadow-lg"
               >
-                <Pause className="h-10 w-10" />
+                <Pause className="h-8 w-8" />
               </Button>
             )}
             
             <Button
               onClick={handleStop}
               size="lg"
-              className="bg-transparent border-4 border-white text-white hover:bg-white hover:text-black w-20 h-20 p-0 font-black text-xl shadow-2xl"
+              className="bg-white border-2 border-gray-300 text-gray-600 hover:border-gray-400 hover:text-gray-800 w-16 h-16 p-0 rounded-full shadow-lg"
             >
-              <Square className="h-10 w-10" />
+              <Square className="h-8 w-8" />
             </Button>
           </div>
         </div>
 
         {/* Bottom Stats */}
-        <div className="relative z-10 m-6 bg-gray-900/80 backdrop-blur-lg border border-gray-700">
+        <div className="m-6 bg-gray-50 rounded-lg">
           <div className="p-6">
             <div className="grid grid-cols-3 gap-6 text-center text-sm">
               <div>
-                <div className="font-black text-lg text-white mb-1">{currentPace}</div>
-                <div className="text-gray-400 uppercase tracking-wide font-bold">Avg Pace</div>
+                <div className="font-light text-lg text-gray-900 mb-1">{currentPace}</div>
+                <div className="text-gray-400 uppercase tracking-wide">Avg Pace</div>
               </div>
               <div>
-                <div className="font-black text-lg text-orange-400 mb-1">{Math.round(distance * 65)}</div>
-                <div className="text-gray-400 uppercase tracking-wide font-bold">Calories</div>
+                <div className="font-light text-lg text-gray-900 mb-1">{Math.round(distance * 65)}</div>
+                <div className="text-gray-400 uppercase tracking-wide">Calories</div>
               </div>
               <div>
-                <div className="font-black text-lg text-green-400 mb-1">{Math.round(distance * 1300)}</div>
-                <div className="text-gray-400 uppercase tracking-wide font-bold">Steps</div>
+                <div className="font-light text-lg text-gray-900 mb-1">{Math.round(distance * 1300)}</div>
+                <div className="text-gray-400 uppercase tracking-wide">Steps</div>
               </div>
             </div>
           </div>

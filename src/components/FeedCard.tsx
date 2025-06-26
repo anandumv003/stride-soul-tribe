@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Heart, MessageCircle, MapPin, Clock, Zap } from "lucide-react";
+import { Heart, MessageCircle, MapPin, Clock } from "lucide-react";
 
 interface FeedCardProps {
   id: number;
@@ -18,67 +18,67 @@ interface FeedCardProps {
 const FeedCard = ({ user, avatar, distance, duration, mood, note, time, cheers, location }: FeedCardProps) => {
   const getMoodColor = (mood: string) => {
     const colors = {
-      'energized': 'text-yellow-400 bg-yellow-400/10 border-yellow-400/20',
-      'accomplished': 'text-purple-400 bg-purple-400/10 border-purple-400/20',
-      'peaceful': 'text-blue-400 bg-blue-400/10 border-blue-400/20',
-      'happy': 'text-green-400 bg-green-400/10 border-green-400/20',
-      'grateful': 'text-orange-400 bg-orange-400/10 border-orange-400/20',
+      'energized': 'text-yellow-600',
+      'accomplished': 'text-purple-600',
+      'peaceful': 'text-blue-600',
+      'happy': 'text-green-600',
+      'grateful': 'text-orange-600',
     };
-    return colors[mood as keyof typeof colors] || 'text-gray-400 bg-gray-400/10 border-gray-400/20';
+    return colors[mood as keyof typeof colors] || 'text-gray-600';
   };
 
   return (
-    <div className="bg-gray-900 border border-gray-800 hover:border-gray-700 transition-all duration-200">
+    <div className="bg-white border border-gray-100 hover:border-gray-200 transition-all duration-200 rounded-lg">
       <div className="p-6">
         {/* User Header */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center text-black font-black text-lg">
+            <div className="w-10 h-10 bg-gray-100 flex items-center justify-center text-gray-600 font-medium text-sm rounded-full">
               {avatar}
             </div>
             <div>
-              <div className="font-bold text-white text-lg">{user}</div>
-              <div className="text-xs text-gray-400 flex items-center uppercase tracking-wide">
+              <div className="font-medium text-gray-900">{user}</div>
+              <div className="text-xs text-gray-400 flex items-center">
                 <Clock className="h-3 w-3 mr-1" />
                 {time}
               </div>
             </div>
           </div>
-          <div className={`px-3 py-1 text-xs font-bold uppercase tracking-wider border ${getMoodColor(mood)}`}>
+          <div className={`px-3 py-1 text-xs font-medium rounded-full bg-gray-50 ${getMoodColor(mood)}`}>
             {mood}
           </div>
         </div>
 
-        {/* Run Stats - Nike Style Grid */}
-        <div className="grid grid-cols-3 gap-4 mb-4 bg-black/30 p-4 border border-gray-800">
+        {/* Run Stats - Clean Grid */}
+        <div className="grid grid-cols-3 gap-4 mb-4 p-4 bg-gray-50 rounded-lg">
           <div className="text-center">
-            <div className="text-2xl font-black text-green-400">{distance}</div>
+            <div className="text-xl font-light text-gray-900">{distance}</div>
             <div className="text-xs text-gray-400 uppercase tracking-wide">KM</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-black text-blue-400">{duration}</div>
+            <div className="text-xl font-light text-gray-900">{duration}</div>
             <div className="text-xs text-gray-400 uppercase tracking-wide">Time</div>
           </div>
           <div className="text-center">
             <div className="text-xs text-gray-400 flex items-center justify-center">
               <MapPin className="h-3 w-3 mr-1" />
             </div>
-            <div className="text-xs text-gray-300 font-medium">{location}</div>
+            <div className="text-xs text-gray-600 font-medium">{location}</div>
           </div>
         </div>
 
         {/* Note */}
-        <p className="text-gray-300 mb-4 leading-relaxed font-medium">{note}</p>
+        <p className="text-gray-700 mb-4 leading-relaxed">{note}</p>
 
         {/* Actions */}
-        <div className="flex items-center space-x-6 pt-4 border-t border-gray-800">
-          <Button variant="ghost" className="text-red-400 hover:text-red-300 hover:bg-red-400/10 p-0 font-bold">
-            <Heart className="h-5 w-5 mr-2" />
-            <span className="text-sm uppercase tracking-wide">{cheers}</span>
+        <div className="flex items-center space-x-6 pt-4 border-t border-gray-100">
+          <Button variant="ghost" className="text-gray-500 hover:text-red-500 hover:bg-red-50 p-0 font-normal">
+            <Heart className="h-4 w-4 mr-2" />
+            <span className="text-sm">{cheers}</span>
           </Button>
-          <Button variant="ghost" className="text-gray-400 hover:text-white hover:bg-white/10 p-0 font-bold">
-            <MessageCircle className="h-5 w-5 mr-2" />
-            <span className="text-sm uppercase tracking-wide">Cheer</span>
+          <Button variant="ghost" className="text-gray-500 hover:text-gray-700 hover:bg-gray-50 p-0 font-normal">
+            <MessageCircle className="h-4 w-4 mr-2" />
+            <span className="text-sm">Cheer</span>
           </Button>
         </div>
       </div>
